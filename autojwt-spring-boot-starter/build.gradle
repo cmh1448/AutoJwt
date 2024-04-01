@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     id 'org.jetbrains.kotlin.jvm'
     id 'org.springframework.boot' version '3.2.3'
@@ -32,6 +34,12 @@ publishing {
 
             from components.java
         }
+    }
+}
+
+compileKotlin {
+    compilerOptions {
+        jvmTarget = JvmTarget.JVM_18
     }
 }
 

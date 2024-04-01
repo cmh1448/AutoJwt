@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     id 'org.jetbrains.kotlin.jvm'
     id 'org.springframework.boot' version '3.2.1'
@@ -11,6 +13,8 @@ version = '0.1.0'
 repositories {
     mavenCentral()
 }
+
+sourceCompatibility = '18'
 
 dependencies {
     testImplementation 'org.jetbrains.kotlin:kotlin-test'
@@ -32,6 +36,12 @@ publishing {
 
             from components.java
         }
+    }
+}
+
+compileKotlin {
+    compilerOptions {
+        jvmTarget = JvmTarget.JVM_18
     }
 }
 
