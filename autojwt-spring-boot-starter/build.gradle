@@ -27,7 +27,7 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             groupId = 'com.github.cmh1448'
-            artifactId = 'autojwt-spring-boot-starter'
+            artifactId = name
             version = version
 
             from components.java
