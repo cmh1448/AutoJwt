@@ -20,7 +20,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
 
-    implementation project(':autojwt-core')
+    implementation project(':autojwt-spring-boot-starter')
 }
 
 

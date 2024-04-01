@@ -10,6 +10,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/autojwt-core" />
+            <option value="$PROJECT_DIR$/autojwt-spring-boot-starter" />
             <option value="$PROJECT_DIR$/example" />
           </set>
         </option>

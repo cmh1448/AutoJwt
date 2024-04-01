@@ -7,4 +7,5 @@ rootProject.name = 'AutoJwt'
 
 include 'autojwt-core'
 include 'example'
+include 'autojwt-spring-boot-starter'
 
