@@ -37,6 +37,14 @@ publishing {
     }
 }
 
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
+}
+
 compileKotlin {
     compilerOptions {
         jvmTarget = JvmTarget.JVM_18
@@ -47,5 +55,5 @@ test {
     useJUnitPlatform()
 }
 kotlin {
-    jvmToolchain(19)
+    jvmToolchain(18)
 }

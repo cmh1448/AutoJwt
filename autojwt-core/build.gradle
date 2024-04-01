@@ -45,10 +45,18 @@ compileKotlin {
     }
 }
 
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
+}
+
 test {
     useJUnitPlatform()
 }
 
 kotlin {
-    jvmToolchain(19)
+    jvmToolchain(18)
 }
