@@ -23,10 +23,12 @@ jobs:
       - name: Publish Artifact
         env:
           TOKEN: ${{ secrets.TOKEN }}
+          TEST: test
 
         run: |
           NEW_VERSION=$(echo "${GITHUB_REF}" | cut -d "/" -f3)
           echo "New version: ${NEW_VERSION}"
           echo "Github username: ${GITHUB_ACTOR}"
-          echo "Token: ${TOKEN}"
+          echo "Token: (${TOKEN})"
+          echo "Test: (${TEST})"
           ./gradlew -Pversion=${NEW_VERSION} :autojwt-spring-boot-starter:publish
