@@ -8,7 +8,7 @@ plugins {
     id 'maven-publish'
 }
 
-group = 'autojwt'
+group = 'org.cmh1448.autojwt'
 version = '0.1.0'
 
 repositories {
@@ -28,13 +28,20 @@ dependencies {
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            groupId = 'com.github.cmh1448'
-            artifactId = name
-            version = version
-
             from components.java
         }
     }
+    repositories {
+        maven {
+            name = "GithubPackages"
+            url = uri("https://maven.pkg.github.com/cmh1448/AutoJwt")
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
+
 }
 
 bootJar {

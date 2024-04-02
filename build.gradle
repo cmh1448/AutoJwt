@@ -2,7 +2,7 @@ plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.9.22'
 }
 
-group = 'autojwt'
+group = 'org.cmh1448.autojwt'
 version = '1.0.0'
 
 repositories {
@@ -10,12 +10,4 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'org.jetbrains.kotlin:kotlin-test'
-}
-
-test {
-    useJUnitPlatform()
-}
-kotlin {
-    jvmToolchain(17)
 }
