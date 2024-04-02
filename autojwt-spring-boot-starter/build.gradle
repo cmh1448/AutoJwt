@@ -47,7 +47,7 @@ jar {
 
 compileKotlin {
     compilerOptions {
-        jvmTarget = JvmTarget.JVM_18
+        jvmTarget = JvmTarget.JVM_17
     }
 }
 
@@ -55,5 +55,5 @@ test {
     useJUnitPlatform()
 }
 kotlin {
-    jvmToolchain(18)
+    jvmToolchain(17)
 }
