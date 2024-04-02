@@ -9,7 +9,7 @@ import java.time.ZoneId
 import java.util.*
 
 class JwtTokenProvider(
-    private val secret: String
+    secret: String
 ) {
     private val secretKey: Key = Keys.hmacShaKeyFor(secret.toByteArray())
     fun generate(

@@ -14,8 +14,6 @@ repositories {
     mavenCentral()
 }
 
-sourceCompatibility = '18'
-
 dependencies {
     testImplementation 'org.jetbrains.kotlin:kotlin-test'
 
@@ -41,7 +39,7 @@ publishing {
 
 compileKotlin {
     compilerOptions {
-        jvmTarget = JvmTarget.JVM_18
+        jvmTarget = JvmTarget.JVM_11
     }
 }
 
@@ -58,5 +56,5 @@ test {
 }
 
 kotlin {
-    jvmToolchain(18)
+    jvmToolchain(11)
 }
