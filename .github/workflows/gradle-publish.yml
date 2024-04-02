@@ -20,15 +20,17 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: '17'
-      - name: Publish Artifact
+      - name: Publish Artifacts
         env:
-          TOKEN: ${{ secrets.TOKEN }}
-          TEST: test
+          ORG_GRADLE_PROJECT_mavenCentralUsername=${{ secrets.MAVEN_USERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword=${{ secrets.MAVEN_PASSWORD }}
+          ORG_GRADLE_PROJECT_signingInMemoryKey=${{ secrets.MEMORY_KEY }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword=${{ secrets.KEY_PASSWORD }}
+
 
         run: |
           NEW_VERSION=$(echo "${GITHUB_REF}" | cut -d "/" -f3)
           echo "New version: ${NEW_VERSION}"
           echo "Github username: ${GITHUB_ACTOR}"
-          echo "Token: (${TOKEN})"
-          echo "Test: (${TEST})"
-          ./gradlew -Pversion=${NEW_VERSION} :autojwt-spring-boot-starter:publish
+          ./gradlew :autojwt-spring-boot-starter:publishAndReleaseToMavenCentral --no-configuration-cache
+          ./gradlew :autojwt-core:publishAndReleaseToMavenCentral --no-configuration-cache
