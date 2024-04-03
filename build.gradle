@@ -1,9 +1,14 @@
 plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.9.22'
+    id "com.vanniktech.maven.publish.base" version "0.28.0"
 }
 
 group = 'org.cmh1448.autojwt'
 version = '1.0.0'
+
+mavenPublishing {
+
+}
 
 repositories {
     mavenCentral()

@@ -1,3 +1,4 @@
+import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -5,6 +6,7 @@ plugins {
     id 'org.springframework.boot' version '3.2.1'
     id 'io.spring.dependency-management' version '1.1.4'
     id 'maven-publish'
+    id "com.vanniktech.maven.publish.base" version "0.28.0"
 }
 
 group = 'io.github.cmh1448'
@@ -23,6 +25,38 @@ dependencies {
     implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
     runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
     runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
+}
+
+mavenPublishing {
+    coordinates('io.github.cmh1448', 'autojwt-core', '0.1.0')
+    pomFromGradleProperties()
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+    signAllPublications()
+
+    pom {
+        name = 'autojwt-core'
+        description = 'AutoJwt Core Library'
+        url = 'https://github.com/cmh1448/AutoJwt'
+        licenses {
+            license {
+                name = 'MIT License'
+                url = 'https://opensource.org/licenses/MIT'
+            }
+        }
+        developers {
+            developer {
+                id = 'cmh1448'
+                name = 'cmh1448'
+                email = 'cmh1448@naver.com'
+            }
+        }
+        scm {
+            connection = 'scm:git:git://github.com/cmh1448/AutoJwt.git'
+            developerConnection = 'scm:git:git://github.com/cmh1448/AutoJwt.git'
+            url = 'https://github.com/cmh1448/AutoJwt'
+        }
+    }
 }
 
 publishing {
