@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$/autojwt-core" />
             <option value="$PROJECT_DIR$/autojwt-spring-boot-starter" />
             <option value="$PROJECT_DIR$/example" />
+            <option value="$PROJECT_DIR$/example-java" />
           </set>
         </option>
       </GradleProjectSettings>

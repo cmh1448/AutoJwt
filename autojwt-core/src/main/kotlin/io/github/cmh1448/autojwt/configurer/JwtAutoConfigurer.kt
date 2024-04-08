@@ -16,8 +16,8 @@ class JwtAutoConfigurer(
 ){
     private val pathPatternConfigurer = PathPatternConfigurer()
 
-    fun pathConfigure(configurer: (PathPatternConfigurer) -> Unit): JwtAutoConfigurer {
-        configurer(pathPatternConfigurer)
+    fun pathConfigure(customizer: Customizer<PathPatternConfigurer>): JwtAutoConfigurer {
+        customizer.customize(pathPatternConfigurer)
         return this
     }
 

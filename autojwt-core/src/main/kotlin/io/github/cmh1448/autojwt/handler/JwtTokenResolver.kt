@@ -7,7 +7,7 @@ import jakarta.servlet.http.HttpServletRequest
 import java.security.Key
 
 class JwtTokenResolver(
-    private val secret: String
+    secret: String
 ) {
     private val secretKey: Key = Keys.hmacShaKeyFor(secret.toByteArray())
 

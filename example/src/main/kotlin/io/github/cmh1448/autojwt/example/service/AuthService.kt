@@ -23,7 +23,7 @@ class AuthService(
         }
 
         return jwtTokenProvider.generate(
-            toLogin.id,
+            toLogin,
             24
         )
     }

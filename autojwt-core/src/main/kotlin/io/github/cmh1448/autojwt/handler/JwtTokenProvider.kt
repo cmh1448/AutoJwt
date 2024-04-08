@@ -1,5 +1,6 @@
 package io.github.cmh1448.autojwt.handler
 
+import io.github.cmh1448.autojwt.model.AuthDetails
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
 import jakarta.servlet.http.HttpServletRequest
@@ -13,10 +14,10 @@ class JwtTokenProvider(
 ) {
     private val secretKey: Key = Keys.hmacShaKeyFor(secret.toByteArray())
     fun generate(
-        name: String,
+        user: AuthDetails,
         expireHours: Long
     ): String {
-        val claims = Jwts.claims().setSubject(name)
+        val claims = Jwts.claims().setSubject(user.getKey())
 
         val expiresAt = Date.from(
             LocalDateTime.now().plusHours(expireHours).atZone(ZoneId.systemDefault()).toInstant()

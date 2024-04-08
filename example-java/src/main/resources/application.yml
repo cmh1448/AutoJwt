@@ -1,0 +1,5 @@
+server:
+  port: 8080
+
+autojwt:
+  secret: VlwEyVBsYt9B0zq5A0ejMnVUyzblYcfPQye09f7MGVA9XkH7

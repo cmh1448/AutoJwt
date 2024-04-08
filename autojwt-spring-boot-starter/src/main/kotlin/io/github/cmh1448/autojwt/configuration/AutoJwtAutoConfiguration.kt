@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.AutoConfiguration
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean
+import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.web.servlet.HandlerExceptionResolver
 
 
@@ -35,4 +36,10 @@ class AutoJwtAutoConfiguration(
     @Bean
     @ConditionalOnMissingBean
     fun jwtConfigurerFactory() = JwtConfigurerFactory(jwtTokenResolver(), handlerExceptionResolver)
+
+    @Bean
+    @ConditionalOnMissingBean
+    fun dummyUserDetailsService() = UserDetailsService {
+        throw NotImplementedError("UserDetailsService is not implemented")
+    }
 }
