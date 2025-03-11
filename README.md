@@ -1,25 +1,27 @@
 # AutoJwt
 
+[<u>English</u>](README.md) | [한국어](README-ko.md)
+
 ## TL;DR
 
-AutoJwt는 JWT인증을 SpringBoot에 빠르고 쉽게 적용 가능하도록 설계된 라이브러리 입니다.  
-사용자는 복잡한 필터구조와 인증처리를 신경쓰지 않고, 간단한 설정만으로 JWT인증을 적용할 수 있습니다.
+AutoJwt is a library designed to quickly and easily apply JWT authentication to Spring Boot.  
+Users can implement JWT authentication with simple configuration without worrying about complex filter structures or authentication processing.
 
 ## Requirements
 
 - Spring Boot 3 or later
-- Java 17 or later (according to Spring Boot version)
+- Java 17 or later (depending on the Spring Boot version)
 
 ## Features
 
-- 아주 짧고 간결하게 JWT 인증 구현 가능
-- JWT 토큰 생성, 갱신 등을 위한 유틸리티 클래스 제공
-- Header를 이용한 Refresh Token Handling
-- 자동 빈 등록을 위한 boot-starter 제공
+- Very short and concise implementation of JWT authentication
+- Utility classes provided for JWT token generation, renewal, etc.
+- Refresh Token handling using headers
+- Boot-starter provided for automatic bean registration
 
 ## Getting Started
 
-### 1. build.gradle에 다음과 같이 의존성을 추가합니다.
+### 1. Add the following dependency to your `build.gradle`:
 
 ```groovy
 dependencies {
@@ -27,7 +29,7 @@ dependencies {
 }
 ```
 
-### 2. 인증 정보를 저장할 모델 클래스를 구현합니다.
+### 2. Implement a model class to store authentication information:
 
 ```java
 @EqualsAndHashCode(callSuper = true)
@@ -45,11 +47,10 @@ public class User extends AuthDetails {
 }
 ```
 
-`AuthDetails`는 라이브러리에서 사용자 정보를 저장하기 위한 추상 클래스 입니다.  
-User 객체에 직접 AuthDetails를 상속하여 사용하여도 되고,  
-UserDetails와 같은 클래스를 생성하여 Entity와 별도로 유저 정보를 저장하여도 무방합니다.
+`AuthDetails` is an abstract class provided by the library to store user information.  
+You can directly extend `AuthDetails` in your `User` object, or create a separate class like `UserDetails` to store user information independently from your entity.
 
-### 3. UserLoadService를 구현합니다.
+### 3. Implement the `UserLoadService`:
 
 ```java
 @Service
@@ -74,12 +75,11 @@ public class UserService implements UserLoadService {
 }
 ```
 
-UserLoadService는 라이브러리가 user key를 이용해서 인증 정보를 로드하기 위한 인터페이스 입니다.  
-추후 설정에서 이 서비스를 의존성 주입하여 라이브러리가 `SecurityContextHolder`에 저장합니다.  
-마찬가지로 UserService와 같은 서비스에 통합하여 작성해도 되고,  
-별도의 `CustomUserLoadService`와 같은 클래스를 생성하여 사용해도 무방합니다.
+`UserLoadService` is an interface used by the library to load authentication information using a user key.  
+In later configurations, this service is dependency-injected so the library can store it in the `SecurityContextHolder`.  
+You can integrate it into a service like `UserService` or create a separate class like `CustomUserLoadService`.
 
-## 4. Security Configuration 작성
+## 4. Write the Security Configuration
 
 ```java
 @Configuration
@@ -104,17 +104,17 @@ public class SecurityConfiguration {
 }
 ```
 
-- `JwtConfigurerFactory`는 UserLoadService를 주입받아 JWT 인증을 위한 Configurer 클래스를 생성합니다.
-- `.pathConfigure()`는 인증이 필요한 URL 패턴을 설정합니다.
-- `.configure()`는 설정된 정보를 바탕으로 JWT인증 필터를 SecurityFilterChain에 추가합니다.
+- `JwtConfigurerFactory` takes a `UserLoadService` as input and creates a Configurer class for JWT authentication.
+- `.pathConfigure()` sets the URL patterns that require authentication.
+- `.configure()` adds the JWT authentication filter to the `SecurityFilterChain` based on the configured information.
 
 ## How To Use?
 
-### JWT 인증
+### JWT Authentication
 
-- 위와 같은 설정을 적용하는것 만으로 `.pathConfigure()`에 설정된 URL 패턴에 대한 JWT 인증이 적용됩니다.
-- JWT 인증이 활성화된 URL 경로에 대한 요청을 보내면, JWT Filter를 통해 인증을 수행한 뒤 SecurityContextHolder에 인증 정보를 저장합니다.
-- 저장된 인증 정보는 `@AuthenticationPrincipal` 어노테이션을 통해 컨트롤러에서 주입받을 수 있습니다.
+- Simply applying the above configuration enables JWT authentication for the URL patterns specified in `.pathConfigure()`.
+- When a request is sent to a URL path with JWT authentication enabled, the JWT Filter performs authentication and stores the information in the `SecurityContextHolder`.
+- The stored authentication information can be injected into a controller using the `@AuthenticationPrincipal` annotation.
 
 ```java
     @GetMapping("/test")
@@ -123,12 +123,12 @@ public class SecurityConfiguration {
     }
 ```
 
-### JWT 토큰 발급
+### JWT Token Issuance
 
-- JWT 토큰의 발급 또는 갱신을 위해 `JwtTokenProvider` 컴포넌트를 제공합니다.
+- The library provides a `JwtTokenProvider` component for issuing or renewing JWT tokens.
 
 ```java
-//JwtDto.TokenData tokenString =  jwtTokenProvider.generate(AuthDetails 인증정보, Long expireHours);
+//JwtDto.TokenData tokenString = jwtTokenProvider.generate(AuthDetails authInfo, Long expireHours);
 
 @RequiredArgsConstructor
 @Service
@@ -155,13 +155,15 @@ public class AuthService {
 }
 ```
 
-`기타 자세한 구현은 레포지토리 내부에 존재하는 예제 프로젝트를 참고하세요`
+`For more detailed implementations, refer to the example project inside the repository.`
 
-### Refresh Token으로 Access Token 재발급 받는 법 (중요!)
-- AutoJWT라이브러리를 사용하면 Refresh Token을 이용해 AccessToken을 새로 발급받는 API 를 따로 구현할 필요가 없습니다.
-- RefreshToken으로 API 요청을 전송하면, 일단 AccessToken처럼 처리 한 뒤 Response Header에 새로운 AccessToken에 대한 데이터를 추가합니다.
+### How to Reissue an Access Token with a Refresh Token (Important!)
 
-`예시`  
+- When using the AutoJWT library, you don’t need to implement a separate API to reissue an Access Token using a Refresh Token.
+- When an API request is sent with a Refresh Token, it is processed as if it were an Access Token, and the response header includes data for the new Access Token.
+
+`Example`
+
 ```text
 Request Header
 
@@ -174,3 +176,7 @@ Response Header
 Refreshed-Access-Token: eyJhbGciOiJIUzI1NiJ9....
 Refreshed-Access-Token-Expire: 2025-03-11T20:54:23.747967
 ```
+
+---
+
+Let me know if you need further assistance!
