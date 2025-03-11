@@ -112,8 +112,8 @@ public class SecurityConfiguration {
 
 ### JWT 인증
 
-- 위와 같은 설정을 적용하는것 만으로 `.pathConfigure()`에 설정된 URL 패턴에 대한 JWT 인증이 적용됩니다.  
-- JWT 인증이 활성화된 URL 경로에 대한 요청을 보내면, JWT Filter를 통해 인증을 수행한 뒤 SecurityContextHolder에 인증 정보를 저장합니다.  
+- 위와 같은 설정을 적용하는것 만으로 `.pathConfigure()`에 설정된 URL 패턴에 대한 JWT 인증이 적용됩니다.
+- JWT 인증이 활성화된 URL 경로에 대한 요청을 보내면, JWT Filter를 통해 인증을 수행한 뒤 SecurityContextHolder에 인증 정보를 저장합니다.
 - 저장된 인증 정보는 `@AuthenticationPrincipal` 어노테이션을 통해 컨트롤러에서 주입받을 수 있습니다.
 
 ```java
@@ -124,9 +124,11 @@ public class SecurityConfiguration {
 ```
 
 ### JWT 토큰 발급
+
 - JWT 토큰의 발급 또는 갱신을 위해 `JwtTokenProvider` 컴포넌트를 제공합니다.
+
 ```java
-//String tokenString =  jwtTokenProvider.generate(AuthDetails 인증정보, Long expireHours);
+//JwtDto.TokenData tokenString =  jwtTokenProvider.generate(AuthDetails 인증정보, Long expireHours);
 
 @RequiredArgsConstructor
 @Service
@@ -151,4 +153,24 @@ public class AuthService {
         userService.addUser(toSave);
     }
 }
+```
+
+`기타 자세한 구현은 레포지토리 내부에 존재하는 예제 프로젝트를 참고하세요`
+
+### Refresh Token으로 Access Token 재발급 받는 법 (중요!)
+- AutoJWT라이브러리를 사용하면 Refresh Token을 이용해 AccessToken을 새로 발급받는 API 를 따로 구현할 필요가 없습니다.
+- RefreshToken으로 API 요청을 전송하면, 일단 AccessToken처럼 처리 한 뒤 Response Header에 새로운 AccessToken에 대한 데이터를 추가합니다.
+
+`예시`  
+```text
+Request Header
+
+Authorization: Bearer {RefreshToken}
+```
+
+```text
+Response Header
+
+Refreshed-Access-Token: eyJhbGciOiJIUzI1NiJ9....
+Refreshed-Access-Token-Expire: 2025-03-11T20:54:23.747967
 ```
