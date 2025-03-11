@@ -1,6 +1,6 @@
 # AutoJwt
 
-[<u>English</u>](README.md) | [한국어](README-ko.md)
+[~~English~~](README.md) | [한국어](README-ko.md)
 
 ## TL;DR
 
