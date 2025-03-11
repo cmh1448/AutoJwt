@@ -25,7 +25,7 @@ AutoJwt는 JWT인증을 SpringBoot에 빠르고 쉽게 적용 가능하도록 �
 
 ```groovy
 dependencies {
-    implementation 'io.github.cmh1448:autojwt-spring-boot-starter:0.1.0'
+    implementation 'io.github.cmh1448:autojwt-spring-boot-starter:1.0.0'
 }
 ```
 

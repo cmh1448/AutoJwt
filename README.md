@@ -25,7 +25,7 @@ Users can implement JWT authentication with simple configuration without worryin
 
 ```groovy
 dependencies {
-    implementation 'io.github.cmh1448:autojwt-spring-boot-starter:0.1.0'
+    implementation 'io.github.cmh1448:autojwt-spring-boot-starter:1.0.0'
 }
 ```
 
