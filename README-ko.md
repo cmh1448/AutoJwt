@@ -142,8 +142,9 @@ public class AuthService {
     public String login(String id, String password) {
         return userService.findById(id)
                 .filter(user -> passwordEncoder.matches(password, user.getPassword()))
-                .map(user -> jwtTokenProvider.generate(user, 24))
-                .orElseThrow(() -> new RuntimeException("email or password is wrong"));
+                .map(user -> jwtTokenProvider.generateRefreshToken(user, 24))
+                .orElseThrow(() -> new RuntimeException("email or password is wrong"))
+                .getTokenString();
     }
 
     public void register(String id, String password) {
@@ -155,6 +156,7 @@ public class AuthService {
         userService.addUser(toSave);
     }
 }
+
 ```
 
 `기타 자세한 구현은 레포지토리 내부에 존재하는 예제 프로젝트를 참고하세요`
