@@ -6,6 +6,7 @@ import io.github.cmh1448.autojwt.model.AuthDetails
 import io.github.cmh1448.autojwt.service.UserLoadService
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
+import java.util.*
 
 @Service
 class UserService: UserLoadService {
@@ -19,7 +20,7 @@ class UserService: UserLoadService {
         return cachedUsers.find { it.id == id }
     }
 
-    override fun loadUserByKey(key: String): AuthDetails {
-        return cachedUsers.find { it.id == key } ?: throw IllegalArgumentException("User not found")
+    override fun loadUserByKey(key: String): Optional<out AuthDetails> {
+        return Optional.ofNullable(cachedUsers.find { it.id == key })
     }
 }

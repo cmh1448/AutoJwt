@@ -26,8 +26,7 @@ public class UserService implements UserLoadService {
 
     @NotNull
     @Override
-    public AuthDetails loadUserByKey(@NotNull String key) {
-        return findById(key)
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+    public Optional<? extends AuthDetails> loadUserByKey(@NotNull String key) {
+        return findById(key);
     }
 }

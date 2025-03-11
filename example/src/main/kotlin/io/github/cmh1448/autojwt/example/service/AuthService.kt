@@ -22,9 +22,9 @@ class AuthService(
             throw IllegalArgumentException("Invalid user or password")
         }
 
-        return jwtTokenProvider.generate(
+        return jwtTokenProvider.generateRefreshToken(
             toLogin,
             24
-        )
+        ).tokenString
     }
 }

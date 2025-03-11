@@ -1,6 +1,6 @@
 package io.github.cmh1448.autojwt.example.configuration
 
-import io.github.cmh1448.autojwt.configurer.JwtConfigurerFactory
+import io.github.cmh1448.autojwt.configurer.JwtAutoConfigurerFactory
 import io.github.cmh1448.autojwt.service.UserLoadService
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -12,7 +12,7 @@ import org.springframework.security.web.SecurityFilterChain
 @Configuration
 @EnableWebSecurity
 class SecurityConfiguration(
-    private val jwtAutoConfigurerFactory: JwtConfigurerFactory,
+    private val jwtAutoConfigurerFactory: JwtAutoConfigurerFactory,
     private val userLoadService: UserLoadService
 )  {
     @Bean

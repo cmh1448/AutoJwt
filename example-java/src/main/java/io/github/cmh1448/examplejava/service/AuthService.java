@@ -16,8 +16,9 @@ public class AuthService {
     public String login(String id, String password) {
         return userService.findById(id)
                 .filter(user -> passwordEncoder.matches(password, user.getPassword()))
-                .map(user -> jwtTokenProvider.generate(user, 24))
-                .orElseThrow(() -> new RuntimeException("email or password is wrong"));
+                .map(user -> jwtTokenProvider.generateRefreshToken(user, 24))
+                .orElseThrow(() -> new RuntimeException("email or password is wrong"))
+                .getTokenString();
     }
 
     public void register(String id, String password) {

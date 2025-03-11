@@ -1,11 +1,13 @@
 package io.github.cmh1448.examplejava.controller;
 
+import io.github.cmh1448.examplejava.dto.AuthDto;
 import io.github.cmh1448.examplejava.model.User;
 import io.github.cmh1448.examplejava.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -14,13 +16,13 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/register")
-    public void register(String id, String password) {
-        authService.register(id, password);
+    public void register(@RequestBody AuthDto.Request request) {
+        authService.register(request.getId(), request.getPassword());
     }
 
     @PostMapping("/login")
-    public String login(String id, String password) {
-        return authService.login(id, password);
+    public String login(@RequestBody AuthDto.Request request) {
+        return authService.login(request.getId(), request.getPassword());
     }
 
     @GetMapping("/test")
