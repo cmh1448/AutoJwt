@@ -176,7 +176,3 @@ Response Header
 Refreshed-Access-Token: eyJhbGciOiJIUzI1NiJ9....
 Refreshed-Access-Token-Expire: 2025-03-11T20:54:23.747967
 ```
-
----
-
-Let me know if you need further assistance!
