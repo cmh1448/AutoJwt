@@ -5,8 +5,7 @@ plugins {
     id 'org.jetbrains.kotlin.jvm'
     id 'org.springframework.boot' version '3.2.1'
     id 'io.spring.dependency-management' version '1.1.4'
-    id 'maven-publish'
-    id "com.vanniktech.maven.publish.base" version "0.28.0"
+    id "com.vanniktech.maven.publish" version "0.31.0-rc2"
 }
 
 group = 'io.github.cmh1448'
@@ -29,8 +28,7 @@ dependencies {
 }
 
 mavenPublishing {
-    coordinates('io.github.cmh1448', 'autojwt-core', '0.1.0')
-    pomFromGradleProperties()
+    coordinates('io.github.cmh1448', 'autojwt-core', '1.0.0')
     publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
     signAllPublications()
 
@@ -59,13 +57,6 @@ mavenPublishing {
     }
 }
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-        }
-    }
-}
 
 compileKotlin {
     compilerOptions {
